@@ -1,0 +1,25 @@
+Create/Update
+  # open a new buffer and type)
+  :Nwrite
+    " :if buffer belongs to a file under ~/.nevernote/buffers
+    "   :write
+    " :else
+    "   :save ~/.nevrnote/buffers/new
+    # nn.rb write CURRENT_BUFFER_NAME
+    #   insert into notes
+    #   puts id
+    #   exit 0
+    " :bd
+    " rm ~/.nevrnote/buffers/new
+
+Search/Edit
+  :Nsearch fish
+  # split window with results
+  # jump to line you want and hit enter
+  # loads your note into the split
+    
+Init
+  :Ninit
+    - Create ~/.nevrnote
+    - Start mongo?
+    - Create mongo database, initialize collection

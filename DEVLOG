@@ -1,0 +1,10 @@
+Installed mongodb
+
+  ###########################################################
+  # A startup item has been generated that will aid in
+  # starting mongodb with launchd. It is disabled
+  # by default. Execute the following command to start it,
+  # and to cause it to launch at startup:
+  #
+  # sudo port load mongodb
+  ###########################################################
