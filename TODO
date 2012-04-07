@@ -1,3 +1,8 @@
+Install
+  $ gem install nevrnote
+  $ nevrnote install_vim_plugin
+  $ vi
+
 Create/Update
   # open a new buffer and type)
   :Nwrite
@@ -5,7 +10,7 @@ Create/Update
     "   :write
     " :else
     "   :save ~/.nevrnote/buffers/new
-    # nn.rb write CURRENT_BUFFER_NAME
+    $ nn.rb write CURRENT_BUFFER_NAME
     #   insert into notes
     #   puts id
     #   exit 0
