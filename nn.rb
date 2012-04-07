@@ -4,3 +4,5 @@
 
 print "#{@command}..."
 puts "ok"
+
+#exit(6)

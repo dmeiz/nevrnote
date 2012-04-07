@@ -1,10 +1,8 @@
 " echo "hello"
 " 
 let s:nn_home_path = $HOME . "/.nevrnote"
-let s:nn_buffers_path = nn_home_path . "/buffers"
-" 
-" echom nn_home_path
-" echom nn_buffers_path
+let s:nn_buffers_path = s:nn_home_path . "/buffers"
+let s:nn_executable = "./nn.rb"
 
 " Returns a nevrnote buffer file for the current buffer.
 "
@@ -27,6 +25,12 @@ function! NNwrite()
 
   if strlen(l:buffer_file)
     echo "we can write to " . l:buffer_file
+    let l:out = system(s:nn_executable . " hello")
+    if v:shell_error ==# 0
+      echo "success with " . l:out
+    else
+      echo "failed"
+    end
   else
     echo "better not do anything with this buffer"
   end
