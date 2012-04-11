@@ -2,7 +2,12 @@
 
 @command = ARGV[0]
 
-print "#{@command}..."
-puts "ok"
-
-#exit(6)
+case @command
+when "write"
+  @path = ARGV[0]
+  File.read(@path)
+  
+else
+  puts "Unknown command '#{@command}'"
+  exit(1)
+end
