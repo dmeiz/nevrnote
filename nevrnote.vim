@@ -1,25 +1,8 @@
-" echo "hello"
-" 
 let s:home_path = $HOME . "/.nevrnote"
-let s:buffers_path = s:home_path . "/buffers"
-let s:executable = "./bin/nevrnote"
+let s:git_options = "--work-tree=" . s:home_path . " --git-dir=" . s:home_path . "/.git"
 
-" Returns a nevrnote buffer file for the current buffer.
+" Returns a path in the git repo to save a new note.
 "
-function! NNbuffer_file()
-  let l:current_buffer = expand("%")
-
-  if !strlen(l:current_buffer)
-    return s:buffers_path . "/new"
-  end
-
-  if stridx(l:current_buffer, s:buffers_path) != -1
-    return l:current_buffer
-  end
-
-  return ""
-endfunction
-
 function! NNnew_note_path()
   let l:path = s:home_path . strftime("/%Y/%m/%d")
   if isdirectory(l:path)
@@ -40,24 +23,28 @@ function! NNnew_note_path()
   end
 endfunction
 
-function! NNwrite()
-  let l:buffer_file = NNbuffer_file()
+" Add path to git repo and commit with message.
+"
+function! NNgit_add_and_commit(path, message)
+  echo system("git " . s:git_options . " add " . a:path)
+  echo system("git " . s:git_options . " commit -m '" . a:message . "'")
+endfunction
 
-  if strlen(l:buffer_file)
-    echo "we can write to " . l:buffer_file
-    let l:out = system(s:executable . " hello")
-    if v:shell_error ==# 0
-      echo "success with " . l:out
-    else
-      echo "failed"
-    end
+" Write the current buffer as a note.
+"
+function! NNwrite()
+  let l:current_buffer = expand("%")
+  let l:message = ""
+
+  if !strlen(l:current_buffer)
+    execute "write" . NNnew_note_path()
+    let l:message = "Added '...'"
+  elseif stridx(l:current_buffer, s:home_path) != -1
+    write
+    let l:message = "Updated '...'"
   else
     echo "better not do anything with this buffer"
   end
 
-"  if filewritable("nn")
-"    echo "file is writable"
-"  else
-"    echo "Sorry"
-"  endif
+  call NNgit_add_and_commit(expand("%"), l:message)
 endfunction
