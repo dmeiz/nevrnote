@@ -3,7 +3,7 @@ X Install
 
   Init ?
 
-  Create/Update2
+  Create/Update
     # open a new buffer and type)
     :NNwrite
       " if buffer has no name
