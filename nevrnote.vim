@@ -1,4 +1,9 @@
-let s:home_path = $HOME . "/.nevrnote"
+if exists("g:nevrnote_home_path")
+  let s:home_path = g:nevrnote_home_path
+else
+  let s:home_path = $HOME . "/.nevrnote"
+end
+
 let s:git_options = "--work-tree=" . s:home_path . " --git-dir=" . s:home_path . "/.git"
 
 " Returns a path in the git repo to save a new note.
@@ -44,6 +49,7 @@ function! NNwrite()
     let l:message = "Updated '...'"
   else
     echo "better not do anything with this buffer"
+    return
   end
 
   call NNgit_add_and_commit(expand("%"), l:message)
